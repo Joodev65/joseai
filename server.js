@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -157,7 +156,8 @@ app.get('/api/books', async (req, res) => {
 async function getChatResponse(message) {
     try {
         // Ambil API key dari Pastebin
-        const apiKeyResponse = await axios.get('https://pastebin.com/raw/ig32YXVm');
+        const axios = require('axios')
+        const apiKeyResponse = await axios.get('https://pastebin.com/raw/fweddm6y');
         const groqApiKey = apiKeyResponse.data.trim();
 
         if (!groqApiKey) {
