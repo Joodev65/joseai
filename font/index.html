@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Generator Sans Serif - JooCode Official</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-section {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px dashed #e0e0e0;
+            display: none;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .result-text {
+            font-size: 24px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            word-break: break-all;
+            border: 1px solid #e0e0e0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #28a745;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .result-text {
+                font-size: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-font"></i> JooCode Sans Serif Generator
+            </div>
+            <div class="subtitle">Convert your text to beautiful sans serif unicode font</div>
+        </div>
+
+        <div class="input-section">
+            <label class="input-label">
+                <i class="fas fa-edit"></i> Enter your text:
+            </label>
+            <input type="text" id="inputText" class="input-field" 
+                   placeholder="Type something here..." 
+                   maxlength="100">
+        </div>
+
+        <button class="generate-btn" onclick="generateFont()">
+            <i class="fas fa-magic"></i> Generate Sans Serif
+        </button>
+
+        <div id="resultSection" class="result-section">
+            <div class="result-label">
+                <i class="fas fa-check-circle"></i> Your sans serif text:
+            </div>
+            <div id="resultText" class="result-text"></div>
+            <button class="copy-btn" onclick="copyText()">
+                <i class="fas fa-copy"></i>
+                <span id="copyText">Copy to clipboard</span>
+            </button>
+        </div>
+
+        <div class="footer">
+            Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> by JooCode Official
+        </div>
+    </div>
+
+    <script>
+        const sansSerifMap = {
+            'a': '𝖺', 'b': '𝖻', 'c': '𝖼', 'd': '𝖽', 'e': '𝖾', 'f': '𝖿',
+            'g': '𝗀', 'h': '𝗁', 'i': '𝗂', 'j': '𝗃', 'k': '𝗄', 'l': '𝗅',
+            'm': '𝗆', 'n': '𝗇', 'o': '𝗈', 'p': '𝗉', 'q': '𝗊', 'r': '𝗋',
+            's': '𝗌', 't': '𝗍', 'u': '𝗎', 'v': '𝗏', 'w': '𝗐', 'x': '𝗑',
+            'y': '𝗒', 'z': '𝗓',
+            'A': '𝖠', 'B': '𝖡', 'C': '𝖢', 'D': '𝖣', 'E': '𝖤', 'F': '𝖥',
+            'G': '𝖦', 'H': '𝖧', 'I': '𝖨', 'J': '𝖩', 'K': '𝖪', 'L': '𝖫',
+            'M': '𝖬', 'N': '𝖭', 'O': '𝖮', 'P': '𝖯', 'Q': '𝖰', 'R': '𝖱',
+            'S': '𝖲', 'T': '𝖳', 'U': '𝖴', 'V': '𝖵', 'W': '𝖶', 'X': '𝖷',
+            'Y': '𝖸', 'Z': '𝖹',
+            '0': '𝟢', '1': '𝟣', '2': '𝟤', '3': '𝟥', '4': '𝟦', '5': '𝟧',
+            '6': '𝟨', '7': '𝟩', '8': '𝟪', '9': '𝟫'
+        };
+
+        function toSansSerif(text) {
+            return text.split('').map(char => {
+                return sansSerifMap[char] || char;
+            }).join('');
+        }
+
+        function generateFont() {
+            const input = document.getElementById('inputText');
+            const resultSection = document.getElementById('resultSection');
+            const resultText = document.getElementById('resultText');
+            
+            if (!input.value.trim()) {
+                alert('Please enter some text first!');
+                return;
+            }
+            
+            const sansSerifText = toSansSerif(input.value);
+            resultText.textContent = sansSerifText;
+            resultSection.style.display = 'block';
+            
+            // Smooth scroll to result
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyText() {
+            const resultText = document.getElementById('resultText').textContent;
+            const copyBtn = document.querySelector('.copy-btn');
+            const copyTextSpan = document.getElementById('copyText');
+            
+            if (!resultText) return;
+            
+            navigator.clipboard.writeText(resultText).then(() => {
+                copyBtn.classList.add('copied');
+                copyTextSpan.textContent = 'Copied!';
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                    copyTextSpan.textContent = 'Copy to clipboard';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy to clipboard';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = resultText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                copyBtn.classList.add('copied');
+                copyTextSpan.textContent = 'Copied!';
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                    copyTextSpan.textContent = 'Copy to clipboard';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy to clipboard';
+                }, 2000);
+            });
+        }
+
+        // Allow Enter key to generate
+        document.getElementById('inputText').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateFont();
+            }
+        });
+    </script>
+</body>
+  </html>
