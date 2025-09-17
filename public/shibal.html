@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tools JooModdss - Background Editor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --bg: #f8f9fa;
+      --text: #202124;
+      --border: #dadce0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    header {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--text);
+    }
+
+    .menu {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .menu.active {
+      display: flex;
+    }
+
+    .menu button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: left;
+      padding: 10px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .menu button:hover {
+      background: #f1f3f4;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .section {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section.active {
+      display: flex;
+    }
+
+    .upload-box {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .upload-box:hover {
+      border-color: var(--primary);
+    }
+
+    .upload-box input[type="file"] {
+      display: none;
+    }
+
+    .preview {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .preview img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .btn:hover {
+      background-color: #0d62c9;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #5f6368;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://github.com/Joodev65.png" alt="Logo" />
+      <h1>Tools JooModdss</h1>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="menu" id="menu">
+      <button onclick="showSection('remove')">Remove Background</button>
+      <button onclick="showSection('change')">Change Background</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Remove Background -->
+    <section id="remove" class="section active">
+      <h2>Remove Background</h2>
+      <div class="upload-box" onclick="document.getElementById('removeInput').click()">
+        <input type="file" id="removeInput" accept="image/*" onchange="previewRemove(event)" />
+        <p>Klik atau tarik gambar ke sini</p>
+      </div>
+      <div class="preview" id="removePreview"></div>
+      <button class="btn" onclick="removeBackground()">Remove Background</button>
+      <div class="preview" id="resultRemove"></div>
+    </section>
+
+    <!-- Change Background -->
+    <section id="change" class="section">
+      <h2>Change Background</h2>
+      <div class="upload-box" onclick="document.getElementById('changeInput').click()">
+        <input type="file" id="changeInput" accept="image/*" onchange="previewChange(event)" />
+        <p>Upload gambar utama</p>
+      </div>
+      <div class="upload-box" onclick="document.getElementById('bgInput').click()">
+        <input type="file" id="bgInput" accept="image/*" onchange="previewBg(event)" />
+        <p>Upload background baru</p>
+      </div>
+      <div class="preview" id="changePreview"></div>
+      <button class="btn" onclick="changeBackground()">Apply Background</button>
+      <div class="preview" id="resultChange"></div>
+    </section>
+  </main>
+
+  <footer>© 2025 Tools JooModdss - Background Editor</footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
+
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      document.getElementById("menu").classList.remove("active");
+    }
+
+    let removeFile, changeFile, bgFile;
+
+    function previewRemove(event) {
+      removeFile = event.target.files[0];
+      const preview = document.getElementById("removePreview");
+      preview.innerHTML = `<img src="${URL.createObjectURL(removeFile)}" alt="Preview" />`;
+    }
+
+    function previewChange(event) {
+      changeFile = event.target.files[0];
+      updateChangePreview();
+    }
+
+    function previewBg(event) {
+      bgFile = event.target.files[0];
+      updateChangePreview();
+    }
+
+    function updateChangePreview() {
+      const preview = document.getElementById("changePreview");
+      preview.innerHTML = "";
+      if (changeFile) preview.innerHTML += `<img src="${URL.createObjectURL(changeFile)}" alt="Main Image" />`;
+      if (bgFile) preview.innerHTML += `<img src="${URL.createObjectURL(bgFile)}" alt="Background Image" />`;
+    }
+
+    async function removeBackground() {
+      if (!removeFile) return alert("Upload gambar dulu!");
+      const formData = new FormData();
+      formData.append("image_file", removeFile);
+      formData.append("size", "auto");
+
+      const result = document.getElementById("resultRemove");
+      result.innerHTML = "<p>Processing...</p>";
+
+      try {
+        const res = await fetch("https://api.remove.bg/v1.0/removebg", {
+          method: "POST",
+          headers: {
+            "X-Api-Key": "TunFjWyWn6RwU2Wkj9K1bo5K" // ← Ganti dengan API key kamu
+          },
+          body: formData
+        });
+
+        if (!res.ok) throw new Error("Gagal menghapus background");
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        result.innerHTML = `
+          <img src="${url}" alt="No Background" />
+          <br>
+          <a class="btn" href="${url}" download="no-bg.png">Download</a>
+        `;
+      } catch (err) {
+        result.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
+      }
+    }
+
+    function changeBackground() {
+      if (!changeFile || !bgFile) return alert("Upload kedua gambar dulu!");
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const mainImg = new Image();
+      const bgImg = new Image();
+
+      mainImg.onload = () => {
+        canvas.width = mainImg.width;
+        canvas.height = mainImg.height;
+        bgImg.onload = () => {
+          ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+          ctx.drawImage(mainImg, 0, 0);
+          const result = document.getElementById("resultChange");
+          const url = canvas.toDataURL();
+          result.innerHTML = `
+            <img src="${url}" alt="Combined" />
+            <br>
+            <a class="btn" href="${url}" download="new-bg.png">Download</a>
+          `;
+        };
+        bgImg.src = URL.createObjectURL(bgFile);
+      };
+      mainImg.src = URL.createObjectURL(changeFile);
+    }
+  </script>
+
+</body>
+</html>
