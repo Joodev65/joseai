@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f7f8fa;
+      background-color: #f8f9fa;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -19,50 +19,57 @@
 
     .card {
       background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      padding: 25px 20px;
       width: 90%;
-      max-width: 400px;
+      max-width: 340px;
       text-align: center;
     }
 
     img {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     h1 {
-      font-weight: 600;
+      font-size: 1.3rem;
       color: #202124;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
     }
 
     input, textarea, button {
       width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.95rem;
       outline: none;
-      transition: border 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     input:focus, textarea:focus {
       border-color: #4285f4;
+      box-shadow: 0 0 4px rgba(66,133,244,0.3);
+    }
+
+    textarea {
+      resize: none;
     }
 
     button {
       background-color: #4285f4;
       color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
       font-weight: 600;
       cursor: pointer;
-      border: none;
       transition: background 0.3s ease;
     }
 
@@ -71,9 +78,25 @@
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 25px;
       font-size: 0.8rem;
       color: #888;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 400px) {
+      .card {
+        padding: 20px 15px;
+        max-width: 300px;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      input, textarea, button {
+        font-size: 0.85rem;
+        padding: 7px 8px;
+      }
     }
   </style>
 </head>
@@ -81,10 +104,10 @@
   <div class="card">
     <img src="https://github.com/Joodev65.png" alt="Logo">
     <h1>7ooModdss Tools</h1>
-    <input id="botToken" type="text" placeholder="Bot Token" required>
-    <input id="chatId" type="text" placeholder="ID Tujuan" required>
-    <textarea id="message" rows="3" placeholder="Pesan..." required></textarea>
-    <input id="count" type="number" placeholder="Jumlah Pesan" min="1" required>
+    <input id="botToken" type="text" placeholder="Bot Token">
+    <input id="chatId" type="text" placeholder="ID Tujuan">
+    <textarea id="message" rows="3" placeholder="Pesan..."></textarea>
+    <input id="count" type="number" placeholder="Jumlah Pesan" min="1">
     <button onclick="sendMessages()">Kirim Pesan</button>
   </div>
 
@@ -107,12 +130,9 @@
           await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: message
-            })
+            body: JSON.stringify({ chat_id: chatId, text: message })
           });
-          console.log(`Pesan ${i+1} terkirim`);
+          console.log(`Pesan ${i + 1} terkirim`);
         } catch (err) {
           alert("Terjadi kesalahan saat mengirim pesan!");
           console.error(err);
