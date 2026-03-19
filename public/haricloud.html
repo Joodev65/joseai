@@ -155,8 +155,27 @@
             height: 100%;
             object-fit: cover;
         }
+        
+        .modal-scrollable {
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 105, 180, 0.5) transparent;
+        }
+
+        .modal-scrollable::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-scrollable::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-scrollable::-webkit-scrollbar-thumb {
+            background: rgba(255, 105, 180, 0.5);
+            border-radius: 3px;
+        }
     </style>
-<base target="_blank">
 </head>
 <body class="aurora-bg text-white min-h-screen overflow-x-hidden">
     <div class="grid-pattern fixed inset-0 pointer-events-none"></div>
@@ -393,9 +412,9 @@
         </div>
     </footer>
 
-    <div id="modal-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div id="modal-content" class="glass-card rounded-3xl max-w-md w-full p-6 md:p-8 modal-enter relative pink-glow">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-pink-500/20 hover:bg-pink-500/40 flex items-center justify-center transition-colors">
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div id="modal-content" class="glass-card rounded-3xl max-w-md w-full p-6 md:p-8 modal-enter relative pink-glow modal-scrollable my-8">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-pink-500/20 hover:bg-pink-500/40 flex items-center justify-center transition-colors z-10">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
