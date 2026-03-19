@@ -14,22 +14,26 @@
         }
         
         .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #ff0066 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .gradient-border {
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(135deg, #ff69b4, #ff1493, #ff0066);
             padding: 2px;
             border-radius: 24px;
         }
         
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 105, 180, 0.2);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(255, 105, 180, 0.5);
         }
         
         .scroll-banner {
@@ -55,8 +59,8 @@
         }
         
         @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 20, 147, 0.8); }
         }
         
         .modal-enter {
@@ -74,7 +78,7 @@
         
         .card-hover:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(255, 105, 180, 0.4);
         }
         
         .btn-shine {
@@ -98,12 +102,14 @@
         }
         
         .grid-pattern {
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
-            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(rgba(255, 105, 180, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 105, 180, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
         
         .aurora-bg {
-            background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
+            background: linear-gradient(-45deg, #2d0a1f, #4a0e2e, #6b0f3a, #8b1046);
             background-size: 400% 400%;
             animation: aurora 15s ease infinite;
         }
@@ -115,11 +121,11 @@
         }
         
         .price-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
         }
         
         .benefit-icon {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.3) 0%, rgba(255, 20, 147, 0.3) 100%);
         }
         
         .scrollbar-hide::-webkit-scrollbar {
@@ -130,28 +136,48 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .pink-glow {
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+        }
+
+        .pink-ring {
+            box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 105, 180, 0.3);
+        }
+
+        .banner-container {
+            aspect-ratio: 16/9;
+            max-height: 500px;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
+<base target="_blank">
 </head>
 <body class="aurora-bg text-white min-h-screen overflow-x-hidden">
     <div class="grid-pattern fixed inset-0 pointer-events-none"></div>
     
-    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-pink-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-2xl overflow-hidden gradient-border p-0.5">
+                    <div class="w-12 h-12 rounded-2xl overflow-hidden gradient-border p-0.5 pink-glow">
                         <img src="https://files.catbox.moe/dn8xrk.jpg" alt="Harii Cloud Logo" class="w-full h-full object-cover rounded-2xl">
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold gradient-text">Harii Cloud</h1>
-                        <p class="text-xs text-gray-400 tracking-wider">PREMIUM BOT SERVER</p>
+                        <p class="text-xs text-pink-300 tracking-wider">PREMIUM BOT SERVER</p>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-sm font-medium hover:text-purple-400 transition-colors">Beranda</a>
-                    <a href="#pricing" class="text-sm font-medium hover:text-purple-400 transition-colors">Paket</a>
-                    <a href="#benefits" class="text-sm font-medium hover:text-purple-400 transition-colors">Benefit</a>
-                    <a href="#contact" class="px-6 py-2 rounded-full gradient-border">
+                    <a href="#home" class="text-sm font-medium hover:text-pink-400 transition-colors">Beranda</a>
+                    <a href="#pricing" class="text-sm font-medium hover:text-pink-400 transition-colors">Paket</a>
+                    <a href="#benefits" class="text-sm font-medium hover:text-pink-400 transition-colors">Benefit</a>
+                    <a href="#contact" class="px-6 py-2 rounded-full gradient-border pink-glow">
                         <span class="block bg-gray-900 rounded-full px-4 py-1 text-sm font-semibold">Hubungi Kami</span>
                     </a>
                 </div>
@@ -162,9 +188,9 @@
     <section id="home" class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div class="max-w-7xl mx-auto text-center">
             <div class="float-animation mb-8">
-                <div class="inline-block p-1 rounded-3xl gradient-border">
+                <div class="inline-block p-1 rounded-3xl gradient-border pink-glow">
                     <div class="bg-gray-900 rounded-3xl px-6 py-2">
-                        <span class="text-sm font-medium text-purple-300">AMD Powered Infrastructure</span>
+                        <span class="text-sm font-medium text-pink-300">AMD Powered Infrastructure</span>
                     </div>
                 </div>
             </div>
@@ -172,18 +198,18 @@
                 Server Bot <span class="gradient-text">Terbaik</span><br>
                 Untuk Bisnis Anda
             </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+            <p class="text-xl text-pink-200/70 max-w-2xl mx-auto mb-12">
                 Performa tinggi dengan spesifikasi AMD. Panel anti-delete, garansi 29 hari, dan dukungan teknis 24/7.
             </p>
             
-            <div class="relative w-full max-w-5xl mx-auto mt-16 rounded-3xl overflow-hidden shadow-2xl">
+            <div class="relative w-full max-w-5xl mx-auto mt-16 rounded-3xl overflow-hidden pink-glow banner-container">
                 <div class="absolute inset-0 gradient-border rounded-3xl"></div>
-                <div class="relative bg-gray-900 rounded-3xl p-1 overflow-hidden">
-                    <div class="scroll-banner flex whitespace-nowrap">
-                        <img src="https://files.catbox.moe/dn8xrk.jpg" class="h-64 md:h-80 object-cover rounded-2xl mx-2" alt="Banner 1">
-                        <img src="https://files.catbox.moe/dn8xrk.jpg" class="h-64 md:h-80 object-cover rounded-2xl mx-2" alt="Banner 2">
-                        <img src="https://files.catbox.moe/dn8xrk.jpg" class="h-64 md:h-80 object-cover rounded-2xl mx-2" alt="Banner 3">
-                        <img src="https://files.catbox.moe/dn8xrk.jpg" class="h-64 md:h-80 object-cover rounded-2xl mx-2" alt="Banner 4">
+                <div class="relative bg-gray-900 rounded-3xl p-1 overflow-hidden h-full">
+                    <div class="scroll-banner flex whitespace-nowrap h-full">
+                        <img src="https://files.catbox.moe/nbjp5i.jpg" class="banner-img rounded-2xl mx-2" alt="Banner 1">
+                        <img src="https://files.catbox.moe/nbjp5i.jpg" class="banner-img rounded-2xl mx-2" alt="Banner 2">
+                        <img src="https://files.catbox.moe/nbjp5i.jpg" class="banner-img rounded-2xl mx-2" alt="Banner 3">
+                        <img src="https://files.catbox.moe/nbjp5i.jpg" class="banner-img rounded-2xl mx-2" alt="Banner 4">
                     </div>
                 </div>
                 <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-gray-900 to-transparent pointer-events-none"></div>
@@ -196,7 +222,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Pilih Paket Anda</h2>
-                <p class="text-gray-400 text-lg">Solusi hosting yang scalable untuk setiap kebutuhan</p>
+                <p class="text-pink-200/70 text-lg">Solusi hosting yang scalable untuk setiap kebutuhan</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="pricing-grid">
@@ -208,86 +234,146 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Mengapa Harii Cloud?</h2>
-                <p class="text-gray-400 text-lg">Keunggulan yang kami tawarkan untuk performa maksimal</p>
+                <p class="text-pink-200/70 text-lg">Keunggulan yang kami tawarkan untuk performa maksimal</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass-card rounded-2xl p-6 card-hover">
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
                     <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">VPS R18 C4</h3>
-                    <p class="text-gray-400 text-sm">Infrastructure server kelas enterprise dengan performa tinggi</p>
+                    <p class="text-pink-200/60 text-sm">Infrastructure server kelas enterprise dengan performa tinggi</p>
                 </div>
                 
-                <div class="glass-card rounded-2xl p-6 card-hover">
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
                     <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Private Script</h3>
-                    <p class="text-gray-400 text-sm">Server terpelihara dengan script eksklusif dan aman</p>
+                    <p class="text-pink-200/60 text-sm">Server terpelihara dengan script eksklusif dan aman</p>
                 </div>
                 
-                <div class="glass-card rounded-2xl p-6 card-hover">
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
                     <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Node.js 20-25</h3>
-                    <p class="text-gray-400 text-sm">Versi Node.js terbaru untuk kompatibilitas maksimal</p>
+                    <p class="text-pink-200/60 text-sm">Versi Node.js terbaru untuk kompatibilitas maksimal</p>
                 </div>
                 
-                <div class="glass-card rounded-2xl p-6 card-hover">
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
                     <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Anti DDoS</h3>
-                    <p class="text-gray-400 text-sm">Proteksi DDoS layer 7 untuk keamanan server Anda</p>
+                    <p class="text-pink-200/60 text-sm">Proteksi DDoS layer 7 untuk keamanan server Anda</p>
                 </div>
                 
-                <div class="glass-card rounded-2xl p-6 card-hover">
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
                     <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Garansi 29 Hari</h3>
-                    <p class="text-gray-400 text-sm">Jaminan uang kembali dan garansi service 29 hari penuh</p>
+                    <p class="text-pink-200/60 text-sm">Jaminan uang kembali dan garansi service 29 hari penuh</p>
                 </div>
                 
-                <div class="glass-card rounded-2xl p-6 card-hover">
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
                     <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">VPS Legal</h3>
-                    <p class="text-gray-400 text-sm">Menggunakan VPS legal dan berlisensi resmi</p>
+                    <p class="text-pink-200/60 text-sm">Menggunakan VPS legal dan berlisensi resmi</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
+                    <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Panel Dapat Diperpanjang</h3>
+                    <p class="text-pink-200/60 text-sm">Perpanjang panel kapan saja sesuai kebutuhan Anda</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
+                    <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Script Berjalan Lancar</h3>
+                    <p class="text-pink-200/60 text-sm">Optimasi server untuk menjalankan script dengan performa optimal</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
+                    <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Panel Anti Delete</h3>
+                    <p class="text-pink-200/60 text-sm">Keamanan ekstra untuk melindungi data panel Anda</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
+                    <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Masa Aktif 30 Hari</h3>
+                    <p class="text-pink-200/60 text-sm">Setiap paket aktif selama 30 hari penuh</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
+                    <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Berkualitas Tinggi</h3>
+                    <p class="text-pink-200/60 text-sm">Server premium dengan hardware berkualitas</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 card-hover pink-glow">
+                    <div class="benefit-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Server Terpelihara</h3>
+                    <p class="text-pink-200/60 text-sm">Maintenance rutin untuk performa optimal</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center">
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center pink-glow">
             <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">Siap Memulai?</h2>
-            <p class="text-gray-400 mb-8 text-lg">Hubungi kami sekarang untuk konsultasi dan pemesanan panel server Anda</p>
+            <p class="text-pink-200/70 mb-8 text-lg">Hubungi kami sekarang untuk konsultasi dan pemesanan panel server Anda</p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://wa.me/6288706432980" target="_blank" class="btn-shine inline-flex items-center justify-center px-8 py-4 rounded-full price-tag text-white font-semibold text-lg transition-transform hover:scale-105">
+                <a href="https://wa.me/6288706432980" target="_blank" class="btn-shine inline-flex items-center justify-center px-8 py-4 rounded-full price-tag text-white font-semibold text-lg transition-transform hover:scale-105 pink-glow">
                     <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
                     </svg>
                     WhatsApp
                 </a>
-                <a href="https://t.me/Mindah5" target="_blank" class="btn-shine inline-flex items-center justify-center px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg transition-transform hover:scale-105">
+                <a href="https://t.me/Mindah5" target="_blank" class="btn-shine inline-flex items-center justify-center px-8 py-4 rounded-full bg-pink-600 hover:bg-pink-700 text-white font-semibold text-lg transition-transform hover:scale-105 pink-glow">
                     <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path>
                     </svg>
@@ -297,70 +383,72 @@
         </div>
     </section>
 
-    <footer class="border-t border-white/10 py-8 px-4 sm:px-6 lg:px-8 mt-20">
+    <footer class="border-t border-pink-500/20 py-8 px-4 sm:px-6 lg:px-8 mt-20">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center space-x-3 mb-4 md:mb-0">
-                <img src="https://files.catbox.moe/dn8xrk.jpg" alt="Logo" class="w-8 h-8 rounded-lg">
+                <img src="https://files.catbox.moe/dn8xrk.jpg" alt="Logo" class="w-8 h-8 rounded-lg pink-ring">
                 <span class="font-semibold gradient-text">Harii Cloud</span>
             </div>
-            <p class="text-gray-500 text-sm">2026 Harii Cloud. All rights reserved.</p>
+            <p class="text-pink-300/50 text-sm">2026 Harii Cloud. All rights reserved.</p>
         </div>
     </footer>
 
     <div id="modal-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div id="modal-content" class="glass-card rounded-3xl max-w-md w-full p-6 md:p-8 modal-enter relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+        <div id="modal-content" class="glass-card rounded-3xl max-w-md w-full p-6 md:p-8 modal-enter relative pink-glow">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-pink-500/20 hover:bg-pink-500/40 flex items-center justify-center transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
             <div class="text-center mb-6">
-                <div class="w-16 h-16 mx-auto rounded-2xl gradient-border p-0.5 mb-4">
+                <div class="w-16 h-16 mx-auto rounded-2xl gradient-border p-0.5 mb-4 pink-glow">
                     <img src="https://files.catbox.moe/dn8xrk.jpg" class="w-full h-full rounded-2xl object-cover" alt="Package">
                 </div>
                 <h3 id="modal-title" class="text-2xl font-bold gradient-text mb-2"></h3>
-                <p class="text-gray-400 text-sm">Spesifikasi Lengkap Panel</p>
+                <p class="text-pink-200/60 text-sm">Spesifikasi Lengkap Panel</p>
             </div>
             
             <div class="space-y-4 mb-8">
-                <div class="flex justify-between items-center py-3 border-b border-white/10">
-                    <span class="text-gray-400">RAM</span>
+                <div class="flex justify-between items-center py-3 border-b border-pink-500/20">
+                    <span class="text-pink-200/70">RAM</span>
                     <span id="modal-ram" class="font-semibold text-lg"></span>
                 </div>
-                <div class="flex justify-between items-center py-3 border-b border-white/10">
-                    <span class="text-gray-400">Disk Storage</span>
+                <div class="flex justify-between items-center py-3 border-b border-pink-500/20">
+                    <span class="text-pink-200/70">Disk Storage</span>
                     <span id="modal-disk" class="font-semibold text-lg"></span>
                 </div>
-                <div class="flex justify-between items-center py-3 border-b border-white/10">
-                    <span class="text-gray-400">CPU Limit</span>
+                <div class="flex justify-between items-center py-3 border-b border-pink-500/20">
+                    <span class="text-pink-200/70">CPU Limit</span>
                     <span id="modal-cpu" class="font-semibold text-lg"></span>
                 </div>
-                <div class="flex justify-between items-center py-3 border-b border-white/10">
-                    <span class="text-gray-400">Masa Aktif</span>
-                    <span class="font-semibold text-lg text-green-400">30 Hari</span>
+                <div class="flex justify-between items-center py-3 border-b border-pink-500/20">
+                    <span class="text-pink-200/70">Masa Aktif</span>
+                    <span class="font-semibold text-lg text-pink-400">30 Hari</span>
                 </div>
-                <div class="flex justify-between items-center py-3 border-b border-white/10">
-                    <span class="text-gray-400">Garansi</span>
-                    <span class="font-semibold text-lg text-green-400">29 Hari</span>
+                <div class="flex justify-between items-center py-3 border-b border-pink-500/20">
+                    <span class="text-pink-200/70">Garansi</span>
+                    <span class="font-semibold text-lg text-pink-400">29 Hari</span>
                 </div>
                 <div class="flex justify-between items-center py-3">
-                    <span class="text-gray-400">Harga Baru</span>
+                    <span class="text-pink-200/70">Harga Baru</span>
                     <span id="modal-price" class="font-bold text-2xl gradient-text"></span>
                 </div>
                 <div class="flex justify-between items-center py-3">
-                    <span class="text-gray-400">Perpanjang</span>
-                    <span id="modal-renew" class="font-semibold text-lg text-purple-300"></span>
+                    <span class="text-pink-200/70">Perpanjang</span>
+                    <span id="modal-renew" class="font-semibold text-lg text-pink-300"></span>
                 </div>
             </div>
             
-            <div class="bg-white/5 rounded-xl p-4 mb-6">
-                <h4 class="font-semibold mb-2 text-sm text-gray-300">Fitur Tambahan:</h4>
-                <ul class="text-sm text-gray-400 space-y-1">
-                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Panel Anti Delete</li>
-                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Node.js 20-25 Support</li>
-                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Anti DDoS Protection</li>
-                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>VPS Legal & Private</li>
+            <div class="bg-pink-500/10 rounded-xl p-4 mb-6 border border-pink-500/20">
+                <h4 class="font-semibold mb-2 text-sm text-pink-200">Fitur Tambahan:</h4>
+                <ul class="text-sm text-pink-200/70 space-y-1">
+                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Panel Anti Delete</li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Node.js 20-25 Support</li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Anti DDoS Protection</li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>VPS Legal & Private</li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Server Terpelihara</li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Script Berjalan Lancar</li>
                 </ul>
             </div>
             
@@ -480,46 +568,46 @@
         function renderPackages() {
             const grid = document.getElementById('pricing-grid');
             grid.innerHTML = packages.map(pkg => `
-                <div class="glass-card rounded-2xl p-6 card-hover relative overflow-hidden ${pkg.popular ? 'ring-2 ring-purple-500' : ''}">
-                    ${pkg.popular ? '<div class="absolute top-0 right-0 bg-gradient-to-l from-purple-600 to-pink-600 text-xs font-bold px-4 py-1 rounded-bl-xl">POPULER</div>' : ''}
+                <div class="glass-card rounded-2xl p-6 card-hover relative overflow-hidden ${pkg.popular ? 'ring-2 ring-pink-500 pink-glow' : ''}">
+                    ${pkg.popular ? '<div class="absolute top-0 right-0 bg-gradient-to-l from-pink-600 to-rose-600 text-xs font-bold px-4 py-1 rounded-bl-xl">POPULER</div>' : ''}
                     
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 rounded-xl gradient-border p-0.5">
+                        <div class="w-12 h-12 rounded-xl gradient-border p-0.5 pink-glow">
                             <img src="https://files.catbox.moe/dn8xrk.jpg" class="w-full h-full rounded-xl object-cover" alt="${pkg.name}">
                         </div>
                         <div>
                             <h3 class="font-bold text-lg">${pkg.name}</h3>
-                            <p class="text-xs text-gray-400">${pkg.description}</p>
+                            <p class="text-xs text-pink-200/60">${pkg.description}</p>
                         </div>
                     </div>
                     
                     <div class="space-y-2 mb-6">
                         <div class="flex items-center text-sm">
-                            <svg class="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
                             </svg>
-                            <span class="text-gray-300">${pkg.ram} RAM</span>
+                            <span class="text-pink-100">${pkg.ram} RAM</span>
                         </div>
                         <div class="flex items-center text-sm">
-                            <svg class="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
                             </svg>
-                            <span class="text-gray-300">${pkg.disk} Disk</span>
+                            <span class="text-pink-100">${pkg.disk} Disk</span>
                         </div>
                         <div class="flex items-center text-sm">
-                            <svg class="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
                             </svg>
-                            <span class="text-gray-300">${pkg.cpu} CPU</span>
+                            <span class="text-pink-100">${pkg.cpu} CPU</span>
                         </div>
                     </div>
                     
                     <div class="mb-6">
                         <div class="text-3xl font-bold gradient-text">${formatPrice(pkg.priceNew)}</div>
-                        <div class="text-sm text-gray-400">Perpanjang: ${formatPrice(pkg.priceRenew)}</div>
+                        <div class="text-sm text-pink-200/60">Perpanjang: ${formatPrice(pkg.priceRenew)}</div>
                     </div>
                     
-                    <button onclick="openModal('${pkg.id}')" class="w-full py-3 rounded-xl border border-purple-500/50 hover:bg-purple-500/20 transition-all font-semibold text-sm btn-shine">
+                    <button onclick="openModal('${pkg.id}')" class="w-full py-3 rounded-xl border border-pink-500/50 hover:bg-pink-500/20 transition-all font-semibold text-sm btn-shine text-pink-300">
                         Add To Cart
                     </button>
                 </div>
@@ -574,9 +662,9 @@
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
-                nav.classList.add('shadow-lg');
+                nav.classList.add('shadow-lg', 'shadow-pink-500/20');
             } else {
-                nav.classList.remove('shadow-lg');
+                nav.classList.remove('shadow-lg', 'shadow-pink-500/20');
             }
         });
 
