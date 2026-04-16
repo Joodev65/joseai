@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Lima</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .display {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .current-total {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #e94560;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+
+        .equation {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 10px;
+            min-height: 24px;
+        }
+
+        .big-button {
+            width: 100%;
+            height: 200px;
+            font-size: 6rem;
+            font-weight: bold;
+            background: linear-gradient(145deg, #e94560, #c73e54);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 30px rgba(233, 69, 96, 0.4),
+                inset 0 -5px 20px rgba(0, 0, 0, 0.2),
+                inset 0 5px 20px rgba(255, 255, 255, 0.2);
+            transition: all 0.1s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .big-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 15px 40px rgba(233, 69, 96, 0.5),
+                inset 0 -5px 20px rgba(0, 0, 0, 0.2),
+                inset 0 5px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .big-button:active {
+            transform: translateY(5px) scale(0.98);
+            box-shadow: 
+                0 5px 15px rgba(233, 69, 96, 0.3),
+                inset 0 -5px 20px rgba(0, 0, 0, 0.3),
+                inset 0 5px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            padding: 15px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .history-section {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .history-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .history-equation {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .history-result {
+            color: #e94560;
+            font-weight: bold;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+        }
+
+        .clear-history {
+            font-size: 0.8rem;
+            color: #e94560;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Scrollbar styling */
+        .history-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .history-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: rgba(233, 69, 96, 0.5);
+            border-radius: 3px;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <div class="display">
+            <div class="current-total" id="total">0</div>
+            <div class="equation" id="equation"></div>
+        </div>
+
+        <button class="big-button" id="btnFive">5</button>
+
+        <div class="controls">
+            <button class="btn-secondary" id="btnReset">Reset</button>
+            <button class="btn-secondary" id="btnClearHistory">Hapus Riwayat</button>
+        </div>
+
+        <div class="history-section">
+            <div class="history-title">
+                <span>Riwayat Perhitungan</span>
+                <span class="clear-history" id="clearAll">Clear All</span>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="empty-state">Belum ada perhitungan</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTotal = 0;
+        let clickCount = 0;
+        let history = [];
+
+        const totalEl = document.getElementById('total');
+        const equationEl = document.getElementById('equation');
+        const historyListEl = document.getElementById('historyList');
+        const btnFive = document.getElementById('btnFive');
+        const btnReset = document.getElementById('btnReset');
+        const btnClearHistory = document.getElementById('btnClearHistory');
+        const clearAllEl = document.getElementById('clearAll');
+
+        // Load history from localStorage
+        function loadHistory() {
+            const saved = localStorage.getItem('calculatorHistory');
+            if (saved) {
+                history = JSON.parse(saved);
+                renderHistory();
+            }
+        }
+
+        // Save history to localStorage
+        function saveHistory() {
+            localStorage.setItem('calculatorHistory', JSON.stringify(history));
+        }
+
+        // Text to Speech
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech
+                window.speechSynthesis.cancel();
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'id-ID'; // Indonesian
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Update display
+        function updateDisplay() {
+            totalEl.textContent = currentTotal;
+            if (clickCount > 0) {
+                const fives = Array(clickCount).fill('5');
+                equationEl.textContent = fives.join(' + ') + ' = ' + currentTotal;
+            } else {
+                equationEl.textContent = '';
+            }
+        }
+
+        // Add to history
+        function addToHistory() {
+            const equation = Array(clickCount).fill('5').join(' + ');
+            const item = {
+                equation: equation,
+                result: currentTotal,
+                timestamp: new Date().toLocaleTimeString('id-ID')
+            };
+            history.unshift(item);
+            saveHistory();
+            renderHistory();
+        }
+
+        // Render history
+        function renderHistory() {
+            if (history.length === 0) {
+                historyListEl.innerHTML = '<div class="empty-state">Belum ada perhitungan</div>';
+                return;
+            }
+
+            historyListEl.innerHTML = history.map(item => `
+                <div class="history-item">
+                    <span class="history-equation">${item.equation} = </span>
+                    <span class="history-result">${item.result}</span>
+                </div>
+            `).join('');
+        }
+
+        // Button 5 click handler
+        btnFive.addEventListener('click', () => {
+            clickCount++;
+            currentTotal += 5;
+
+            updateDisplay();
+            speak(currentTotal.toString());
+
+            // Add visual feedback
+            btnFive.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btnFive.style.transform = '';
+            }, 100);
+        });
+
+        // Reset handler
+        btnReset.addEventListener('click', () => {
+            if (clickCount > 0) {
+                addToHistory();
+            }
+            currentTotal = 0;
+            clickCount = 0;
+            updateDisplay();
+            speak('Reset');
+        });
+
+        // Clear history handler
+        btnClearHistory.addEventListener('click', () => {
+            if (confirm('Yakin mau hapus semua riwayat?')) {
+                history = [];
+                saveHistory();
+                renderHistory();
+            }
+        });
+
+        clearAllEl.addEventListener('click', () => {
+            if (confirm('Yakin mau hapus semua riwayat?')) {
+                history = [];
+                saveHistory();
+                renderHistory();
+            }
+        });
+
+        // Keyboard support (optional)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '5' || e.key === ' ') {
+                btnFive.click();
+            } else if (e.key === 'Escape' || e.key === 'r' || e.key === 'R') {
+                btnReset.click();
+            }
+        });
+
+        // Initialize
+        loadHistory();
+    </script>
+</body>
+</html>
