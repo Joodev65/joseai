@@ -157,7 +157,7 @@ async function getChatResponse(message) {
     try {
         // Ambil API key dari Pastebin
         const axios = require('axios')
-        const apiKeyResponse = await axios.get('https://pastebin.com/raw/fweddm6y');
+        const apiKeyResponse = await axios.get('https://pastebin.com/raw/7wHSgXzA');
         const groqApiKey = apiKeyResponse.data.trim();
 
         if (!groqApiKey) {
