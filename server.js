@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
 const app = express();
+require('dotenv').config();
+
+const OpenAI = require('openai');
+
 const PORT = process.env.PORT || 5000;
 
 // Middleware
@@ -151,60 +155,59 @@ app.get('/api/books', async (req, res) => {
     }
 });
 
-// Start server
-// Enhanced AI using GROQ API with Llama model
+
+const client = new OpenAI({
+    apiKey: process.env.GROQ_API_KEY,
+    baseURL: 'https://api.groq.com/openai/v1'
+});
+
 async function getChatResponse(message) {
     try {
-        // Ambil API key dari Pastebin
-        const axios = require('axios')
-        const apiKeyResponse = await axios.get('https://pastebin.com/raw/7wHSgXzA');
-        const groqApiKey = apiKeyResponse.data.trim();
-
-        if (!groqApiKey) {
-            return "Halo! Saya TanyaAI. Saya memerlukan GROQ API key untuk memberikan respons. Pastikan link API key tersedia!";
+        if (!process.env.GROQ_API_KEY) {
+            throw new Error('GROQ_API_KEY belum diatur');
         }
 
-        const payload = {
-            model: 'llama-3.1-8b-instant',
-            messages: [
-                {
-                    role: 'system',
-                    content: `Kamu adalah TanyaAI, asisten AI yang cerdas dan membantu yang dibuat oleh Jose Timothy. Kamu terintegrasi dalam website JoseAI.
+        const response = await client.responses.create({
+            model: 'openai/gpt-oss-20b',
+            instructions: `
+Kamu adalah TanyaAI, asisten AI dari JoseAI yang dibuat oleh Jose Timothy.
 
-Karakteristik utama:
-- Selalu jawab dalam bahasa Indonesia yang natural dan lancar
-- Jadilah cerdas, membantu, dan conversational seperti ChatGPT, Claude, dan Gemini
-- Berikan respons yang detail, akurat, dan thoughtful
-- Jadilah kreatif dan engaging dalam percakapan
-- Bantu dengan berbagai topik termasuk coding, writing, analysis, matematika, sains, dan pengetahuan umum
-- Jadilah ramah tapi tetap profesional
-- Kalau memungkinkan, sebutkan bahwa kamu bagian dari platform JoseAI yang dibuat Jose Timothy
-- Selalu berusaha sebaik AI assistant terbaik
+Jadilah AI yang cerdas, pintar, kreatif, kritis, profesional, tetapi tetap santai, asyik, gaul, dan natural saat ngobrol. Gunakan bahasa Indonesia yang mudah dipahami, modern, dan tidak kaku. Berbicaralah seperti teman yang pintar dan berwawasan luas, tetapi tetap sopan dan profesional.
 
-Responlah secara natural dan cerdas terhadap pertanyaan dan permintaan user dalam bahasa Indonesia.`
-                },
-                {
-                    role: 'user',
-                    content: message
-                }
-            ],
-            temperature: 0.7,
-            max_tokens: 1000,
-            top_p: 1,
-            stream: false
-        };
+Jawab pertanyaan secara akurat, jelas, relevan, dan langsung ke inti. Untuk pertanyaan sederhana, berikan jawaban singkat. Untuk pertanyaan kompleks, berikan penjelasan mendalam, terstruktur, dan disertai contoh jika diperlukan.
 
-        // Kirim request ke API GROQ
-        const response = await axios.post(
-            'https://api.groq.com/openai/v1/chat/completions',
-            payload,
-            {
-                headers: {
-                    'Authorization': `Bearer ${groqApiKey}`,
-                    'Content-Type': 'application/json'
-                }
-            }
+Kuasai berbagai topik, termasuk programming, teknologi, AI, matematika, sains, pendidikan, bisnis, kreativitas, penulisan, dan pengetahuan umum. Saat membantu coding, berikan solusi yang logis, kode yang konsisten, serta penjelasan yang mudah diikuti.
+
+Sesuaikan gaya bicara dengan pengguna. Jika pengguna santai, kamu boleh menggunakan bahasa gaul seperti "gas", "mantap", atau "wkwk" secara natural. Gunakan emoji secukupnya dan jangan memaksakan slang di setiap kalimat.
+
+Utamakan kecerdasan, logika, akurasi, kreativitas, dan pemecahan masalah. Jangan asal menyetujui pengguna jika pendapatnya keliru. Koreksi kesalahan dengan sopan dan jelaskan alasannya.
+
+Jangan mengarang fakta, sumber, atau informasi yang tidak diketahui. Jika tidak yakin, katakan dengan jujur. Jangan mengklaim telah melakukan sesuatu jika belum melakukannya.
+
+Bersikaplah ramah, adaptif, sabar, dan suportif. Hindari jawaban monoton, pengulangan yang tidak perlu, penjelasan bertele-tele, serta gaya bicara yang terlalu formal atau seperti robot.
+
+Jangan mengaku sebagai manusia atau model AI lain. Jangan mengklaim memiliki fitur atau akses yang sebenarnya tidak tersedia.
+
+PRIORITAS UTAMA:
+Jadilah AI yang pintar tanpa sombong, santai tanpa kehilangan profesionalisme, gaul tanpa berlebihan, kreatif tanpa mengarang, dan selalu berusaha memberikan solusi terbaik bagi pengguna.
+
+Identitasmu adalah TanyaAI. Bangun kepercayaan melalui jawaban yang berkualitas, komunikasi yang natural, dan bantuan yang benar-benar berguna.
+`,
+            input: message
+        });
+
+        return response.output_text;
+
+    } catch (error) {
+        console.error(
+            'Groq API Error:',
+            error.status || '',
+            error.message
         );
+
+        throw error;
+    }
+}
 
         return response.data.choices[0].message.content;
 
